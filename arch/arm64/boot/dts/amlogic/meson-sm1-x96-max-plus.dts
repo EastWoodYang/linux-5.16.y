@@ -11,10 +11,8 @@
 #include <dt-bindings/sound/meson-g12a-tohdmitx.h>
 
 / {
-	//compatible = "amediatech,x96-max-plus", "amlogic,sm1";
-	//model = "Shenzhen Amediatech Technology Co., Ltd X96 Max+";
-	compatible = "amlogic,sm1";
-	model = "AMedia X96 Max+";
+	compatible = "amediatech,x96-max-plus", "amlogic,sm1";
+	model = "Shenzhen Amediatech Technology Co., Ltd X96 Max+";
 
 	sound {
 		compatible = "amlogic,axg-sound-card";
@@ -173,7 +171,7 @@
 	uart-has-rtscts;
 
 	bluetooth {
-		compatible = "brcm,bcm43438-bt";
+		compatible = "realtek,rtl8822cs-bt";
 		interrupt-parent = <&gpio_intc>;
 		interrupts = <95 IRQ_TYPE_LEVEL_HIGH>;
 		interrupt-names = "host-wakeup";
@@ -183,7 +181,6 @@
 		clock-names = "lpo";
 		vbat-supply = <&vddao_3v3>;
 		vddio-supply = <&vddio_ao1v8>;
-		status = "disabled";
 	};
 };
 
