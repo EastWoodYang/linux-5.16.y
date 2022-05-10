@@ -191,6 +191,7 @@
 		compatible = "brcm,bcm4330-bt";
 		clocks = <&wifi32k>;
 		clock-names = "lpo";
+                status = "disabled";
 	};
 };
 
