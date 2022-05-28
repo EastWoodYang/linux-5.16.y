@@ -188,10 +188,9 @@
 	uart-has-rtscts;
 
 	bluetooth {
-		compatible = "brcm,bcm4330-bt";
+		compatible = "realtek,rtl8723bs-bt";
 		clocks = <&wifi32k>;
 		clock-names = "lpo";
-                status = "disabled";
 	};
 };
 
