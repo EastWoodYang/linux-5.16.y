@@ -13,6 +13,11 @@
 / {
 	compatible = "amediatech,x96-max-plus", "amlogic,sm1";
 	model = "Shenzhen Amediatech Technology Co., Ltd X96 Max+";
+	
+	memory@0 {
+                device_type = "memory";
+                reg = <0x0 0x0 0x0 0xFFFFFFFF>;
+        };
 
 	sound {
 		compatible = "amlogic,axg-sound-card";
@@ -104,8 +109,9 @@
 
 	pinctrl-0 = <&eth_pins>, <&eth_rgmii_pins>;
 	pinctrl-names = "default";
-	phy-mode = "rgmii-txid";
 	phy-handle = <&external_phy>;
+	phy-mode = "rgmii";
+        amlogic,tx-delay-ns = <2>;
 
 	rx-internal-delay-ps = <800>;
 
@@ -122,11 +128,14 @@
 
 &ext_mdio {
 	external_phy: ethernet-phy@0 {
-		/* Realtek RTL8211F (0x001cc916) */
+		/*
+                 * Realtek RTL8211F (0x001cc916)
+                 * JLSemi JL2101 (0x937c4032)
+                 */
 		reg = <0>;
 		max-speed = <1000>;
 
-		reset-assert-us = <10000>;
+		reset-assert-us = <30000>;
 		reset-deassert-us = <80000>;
 		reset-gpios = <&gpio GPIOZ_15 (GPIO_ACTIVE_LOW | GPIO_OPEN_DRAIN)>;
 
