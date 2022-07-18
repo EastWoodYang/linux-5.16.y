@@ -182,7 +182,7 @@ config ICPLUS_PHY
 	  
 config JLSEMI_JL2XX1_PHY
 	tristate "JLSemi JL2XX1 PHYs"
-	---help---
+	help
 	  Currently supports the JLSemi jl2xx1 PHYs.
 
 config LXT_PHY
