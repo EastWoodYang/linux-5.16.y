@@ -88,19 +88,31 @@
 
 	pinctrl-0 = <&eth_pins>, <&eth_rgmii_pins>;
 	pinctrl-names = "default";
-	phy-mode = "rgmii-txid";
 	phy-handle = <&external_phy>;
-
-	rx-internal-delay-ps = <800>;
+	phy-mode = "rgmii";
+        amlogic,tx-delay-ns = <2>;
+	
+        snps,aal;
+        snps,rxpbl = <0x8>;
+        snps,txpbl = <0x8>;
+	
+        rx-fifo-depth = <4096>;
+        tx-fifo-depth = <4096>;
+	
+        nvmem-cells = <&eth_mac>;
+        nvmem-cell-names = "eth_mac";
 };
 
 &ext_mdio {
 	external_phy: ethernet-phy@0 {
-		/* Realtek RTL8211F (0x001cc916) */
+		/*
+                 * Realtek RTL8211F (0x001cc916)
+                 * JLSemi JL2101 (0x937c4032)
+                 */
 		reg = <0>;
 		max-speed = <1000>;
 
-		reset-assert-us = <10000>;
+		reset-assert-us = <30000>;
 		reset-deassert-us = <80000>;
 		reset-gpios = <&gpio GPIOZ_15 (GPIO_ACTIVE_LOW | GPIO_OPEN_DRAIN)>;
 
@@ -146,14 +158,7 @@
 
 	bluetooth {
 		compatible = "realtek,rtl8822cs-bt";
-		interrupt-parent = <&gpio_intc>;
-		interrupts = <95 IRQ_TYPE_LEVEL_HIGH>;
-		interrupt-names = "host-wakeup";
-		shutdown-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
-		max-speed = <2000000>;
-		clocks = <&wifi32k>;
-		clock-names = "lpo";
-		vbat-supply = <&vddao_3v3>;
-		vddio-supply = <&vddio_ao1v8>;
+		enable-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
+		host-wake-gpios = <&gpio GPIOX_18 GPIO_ACTIVE_HIGH>;
 	};
 };
